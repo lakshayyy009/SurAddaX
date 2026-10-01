@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SurAddaX — Bollywood Music</title>
+<meta name="description" content="SurAddaX - Bollywood remixes, retro songs and music. Listen to your favourite songs online.">
+<meta name="keywords" content="SurAddaX, Sur Adda X, Bollywood remix, Hindi songs, retro Bollywood music, remix songs">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    background:#050505;
+    color:white;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+/* Animated background */
+body:before,
+body:after{
+    content:"";
+    position:fixed;
+    width:450px;
+    height:450px;
+    border-radius:50%;
+    filter:blur(100px);
+    opacity:.18;
+    z-index:-2;
+}
+
+body:before{
+    background:#ff0066;
+    top:-180px;
+    left:-150px;
+    animation:float1 8s infinite alternate;
+}
+
+body:after{
+    background:#7b2cff;
+    right:-180px;
+    bottom:-150px;
+    animation:float2 9s infinite alternate;
+}
+
+@keyframes float1{
+    from{transform:translate(0,0)}
+    to{transform:translate(180px,100px)}
+}
+
+@keyframes float2{
+    from{transform:translate(0,0)}
+    to{transform:translate(-160px,-100px)}
+}
+
+/* Top navigation */
+nav{
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    background:rgba(0,0,0,.72);
+    backdrop-filter:blur(18px);
+    border-bottom:1px solid rgba(255,255,255,.08);
+    position:sticky;
+    top:0;
+    z-index:20;
+}
+
+.logo{
+    font-size:27px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+.logo span{
+    color:#ff2975;
+}
+
+.nav-right{
+    display:flex;
+    gap:10px;
+}
+
+.nav-btn{
+    padding:9px 17px;
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:20px;
+    color:white;
+    background:rgba(255,255,255,.05);
+}
+
+/* Hero */
+.hero{
+    width:88%;
+    max-width:1250px;
+    margin:45px auto 30px;
+    min-height:340px;
+    border-radius:30px;
+    position:relative;
+    overflow:hidden;
+    padding:55px;
+    display:flex;
+    align-items:center;
+    background:
+      linear-gradient(90deg,rgba(0,0,0,.94),rgba(0,0,0,.48)),
+      radial-gradient(circle at 80% 30%,#ff1674,transparent 30%),
+      radial-gradient(circle at 90% 80%,#5520ff,transparent 30%),
+      #151515;
+    border:1px solid rgba(255,255,255,.12);
+    box-shadow:0 25px 80px rgba(0,0,0,.5);
+}
+
+.hero-content{
+    max-width:650px;
+}
+
+.small-title{
+    color:#ff3b82;
+    font-weight:bold;
+    letter-spacing:3px;
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+.hero h1{
+    font-size:clamp(45px,7vw,82px);
+    line-height:.95;
+    margin-bottom:20px;
+}
+
+.hero h1 span{
+    color:#ff2975;
+}
+
+.hero p{
+    color:#cfcfcf;
+    line-height:1.6;
+    max-width:570px;
+}
+
+.hero-buttons{
+    margin-top:25px;
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.primary{
+    background:#ff2975;
+    color:white;
+    border:none;
+    padding:13px 23px;
+    border-radius:25px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.secondary{
+    background:rgba(255,255,255,.08);
+    color:white;
+    border:1px solid rgba(255,255,255,.16);
+    padding:13px 23px;
+    border-radius:25px;
+    cursor:pointer;
+}
+
+/* Equalizer decoration */
+.equalizer{
+    position:absolute;
+    right:8%;
+    bottom:45px;
+    height:140px;
+    display:flex;
+    align-items:end;
+    gap:6px;
+    opacity:.7;
+}
+
+.equalizer i{
+    display:block;
+    width:7px;
+    background:#ff2975;
+    border-radius:10px;
+    animation:bars .8s infinite ease-in-out alternate;
+}
+
+.equalizer i:nth-child(1){height:35px}
+.equalizer i:nth-child(2){height:90px;animation-delay:.1s}
+.equalizer i:nth-child(3){height:55px;animation-delay:.2s}
+.equalizer i:nth-child(4){height:120px;animation-delay:.3s}
+.equalizer i:nth-child(5){height:75px;animation-delay:.4s}
+.equalizer i:nth-child(6){height:135px;animation-delay:.5s}
+.equalizer i:nth-child(7){height:60px;animation-delay:.6s}
+.equalizer i:nth-child(8){height:105px;animation-delay:.7s}
+
+@keyframes bars{
+    to{transform:scaleY(.35)}
+}
+
+/* Main */
+.container{
+    width:88%;
+    max-width:1250px;
+    margin:auto;
+    padding-bottom:150px;
+}
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:35px 0 18px;
+}
+
+.section-title h2{
+    font-size:25px;
+}
+
+.section-title span{
+    color:#aaa;
+    font-size:13px;
+}
+
+/* Music cards */
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:18px;
+}
+
+.card{
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.08);
+    padding:12px;
+    border-radius:18px;
+    transition:.3s;
+    cursor:pointer;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+    background:rgba(255,255,255,.09);
+    box-shadow:0 15px 40px rgba(255,0,100,.13);
+}
+
+.cover{
+    aspect-ratio:1/1;
+    border-radius:14px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:50px;
+    margin-bottom:13px;
+    background:
+      radial-gradient(circle at 30% 25%,#ff3a85,transparent 30%),
+      radial-gradient(circle at 75% 75%,#542cff,transparent 35%),
+      #191919;
+}
+
+.card h3{
+    font-size:16px;
+    margin-bottom:6px;
+}
+
+.card p{
+    color:#999;
+    font-size:13px;
+}
+
+/* Playlist */
+.playlist{
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:22px;
+    overflow:hidden;
+}
+
+.song{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:14px 18px;
+    border-bottom:1px solid rgba(255,255,255,.06);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.song:last-child{
+    border-bottom:0;
+}
+
+.song:hover{
+    background:rgba(255,255,255,.06);
+}
+
+.song-number{
+    width:25px;
+    color:#888;
+}
+
+.song-icon{
+    width:48px;
+    height:48px;
+    border-radius:10px;
+    background:linear-gradient(135deg,#ff2975,#542cff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.song-info{
+    flex:1;
+}
+
+.song-info b{
+    display:block;
+    margin-bottom:5px;
+}
+
+.song-info small{
+    color:#888;
+}
+
+.song-time{
+    color:#888;
+    font-size:13px;
+}
+
+/* Player */
+.player{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    height:95px;
+    background:rgba(8,8,8,.94);
+    backdrop-filter:blur(20px);
+    border-top:1px solid rgba(255,255,255,.12);
+    z-index:50;
+    display:flex;
+    align-items:center;
+    gap:22px;
+    padding:12px 5%;
+}
+
+.now{
+    width:220px;
+    min-width:150px;
+}
+
+.now b{
+    display:block;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.now small{
+    color:#888;
+}
+
+.controls{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.control{
+    border:none;
+    background:transparent;
+    color:white;
+    font-size:21px;
+    cursor:pointer;
+}
+
+.play{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:white;
+    color:black;
+    border:none;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.progress-area{
+    flex:1;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.progress{
+    height:5px;
+    border-radius:10px;
+    background:#3b3b3b;
+    flex:1;
+    cursor:pointer;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:#ff2975;
+}
+
+.time{
+    color:#888;
+    font-size:11px;
+    width:35px;
+}
+
+.volume{
+    width:100px;
+}
+
+input[type=range]{
+    width:100%;
+    accent-color:#ff2975;
+}
+
+/* Mobile */
+@media(max-width:700px){
+
+    nav{
+        padding:0 5%;
+    }
+
+    .nav-right{
+        display:none;
+    }
+
+    .hero{
+        width:92%;
+        padding:35px 25px;
+        min-height:390px;
+    }
+
+    .hero h1{
+        font-size:48px;
+    }
+
+    .equalizer{
+        opacity:.25;
+        right:10px;
+    }
+
+    .container{
+        width:92%;
+    }
+
+    .cards{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .player{
+        height:115px;
+        flex-wrap:wrap;
+        gap:8px;
+        padding:9px 15px;
+    }
+
+    .now{
+        width:45%;
+    }
+
+    .controls{
+        width:45%;
+        justify-content:flex-end;
+    }
+
+    .progress-area{
+        width:100%;
+        flex-basis:100%;
+    }
+
+    .volume{
+        display:none;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="logo">Sur<span>AddaX</span></div>
+    <div class="nav-right">
+        <div class="nav-btn">Home</div>
+        <div class="nav-btn">Music</div>
+        <div class="nav-btn">Remixes</div>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="hero-content">
+        <div class="small-title">WELCOME TO SURADDAX</div>
+
+        <h1>Feel The<br><span>Music.</span></h1>
+
+        <p>
+            Bollywood classics, retro vibes and fresh remix sounds.
+            Discover music and enjoy your favourite tracks with SurAddaX.
+        </p>
+
+        <div class="hero-buttons">
+            <button class="primary" onclick="playSong(0)">▶ Play Music</button>
+            <button class="secondary" onclick="document.getElementById('songs').scrollIntoView({behavior:'smooth'})">
+                Explore Songs
+            </button>
+        </div>
+    </div>
+
+    <div class="equalizer">
+        <i></i><i></i><i></i><i></i>
+        <i></i><i></i><i></i><i></i>
+    </div>
+</section>
+
+<main class="container">
+
+    <div class="section-title">
+        <h2>Featured Music</h2>
+        <span>SurAddaX Originals</span>
+    </div>
+
+    <div class="cards">
+
+        <div class="card" onclick="playSong(0)">
+            <div class="cover">🎵</div>
+            <h3>Retro Bollywood</h3>
+            <p>Classic • Remix</p>
+        </div>
+
+        <div class="card" onclick="playSong(1)">
+            <div class="cover">💿</div>
+            <h3>Love Vibes</h3>
+            <p>Romantic • Hindi</p>
+        </div>
+
+        <div class="card" onclick="playSong(2)">
+            <div class="cover">🎧</div>
+            <h3>Remix Zone</h3>
+            <p>Bollywood • Remix</p>
+        </div>
+
+        <div class="card" onclick="playSong(3)">
+            <div class="cover">🔥</div>
+            <h3>90s Collection</h3>
+            <p>90s • Bollywood</p>
+        </div>
+
+    </div>
+
+    <div class="section-title" id="songs">
+        <h2>All Songs</h2>
+        <span>Tap a song to play</span>
+    </div>
+
+    <div class="playlist">
+
+        <div class="song" onclick="playSong(0)">
+            <div class="song-number">01</div>
+            <div class="song-icon">🎵</div>
+            <div class="song-info">
+                <b>SurAddaX Song 01</b>
+                <small>Bollywood Remix</small>
+            </div>
+            <div class="song-time">03:45</div>
+        </div>
+
+        <div class="song" onclick="playSong(1)">
+            <div class="song-number">02</div>
+            <div class="song-icon">💿</div>
+            <div class="song-info">
+                <b>SurAddaX Song 02</b>
+                <small>Love Remix</small>
+            </div>
+            <div class="song-time">04:12</div>
+        </div>
+
+        <div class="song" onclick="playSong(2)">
+            <div class="song-number">03</div>
+            <div class="song-icon">🎧</div>
+            <div class="song-info">
+                <b>SurAddaX Song 03</b>
+                <small>DJ Remix</small>
+            </div>
+            <div class="song-time">03:58</div>
+        </div>
+
+        <div class="song" onclick="playSong(3)">
+            <div class="song-number">04</div>
+            <div class="song-icon">🔥</div>
+            <div class="song-info">
+                <b>SurAddaX Song 04</b>
+                <small>90s Bollywood</small>
+            </div>
+            <div class="song-time">05:01</div>
+        </div>
+
+    </div>
+
+</main>
+
+<!-- Spotify-style player -->
+<div class="player">
+
+    <div class="now">
+        <b id="currentTitle">Select a song</b>
+        <small id="currentArtist">SurAddaX</small>
+    </div>
+
+    <div class="controls">
+        <button class="control" onclick="previousSong()">⏮</button>
+        <button class="play" id="playBtn" onclick="togglePlay()">▶</button>
+        <button class="control" onclick="nextSong()">⏭</button>
+    </div>
+
+    <div class="progress-area">
+
+        <div class="time" id="currentTime">0:00</div>
+
+        <div class="progress" id="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="time" id="duration">0:00</div>
+
+    </div>
+
+    <div class="volume">
+        🔊
+        <input type="range" min="0" max="1" step="0.01" value="0.8" id="volume">
+    </div>
+
+</div>
+
+<script>
+
+/*
+=================================================
+SURADDAX MUSIC FILES
+=================================================
+
+Baad mein apni MP3 files isi naam se upload karna:
+
+songs/song1.mp3
+songs/song2.mp3
+songs/song3.mp3
+songs/song4.mp3
+
+*/
+
+const songs = [
+    {
+        title:"SurAddaX Song 01",
+        artist:"Bollywood Remix",
+        file:"songs/song1.mp3"
+    },
+    {
+        title:"SurAddaX Song 02",
+        artist:"Love Remix",
+        file:"songs/song2.mp3"
+    },
+    {
+        title:"SurAddaX Song 03",
+        artist:"DJ Remix",
+        file:"songs/song3.mp3"
+    },
+    {
+        title:"SurAddaX Song 04",
+        artist:"90s Bollywood",
+        file:"songs/song4.mp3"
+    }
+];
+
+let currentSong = 0;
+let audio = new Audio();
+let playing = false;
+
+const playBtn = document.getElementById("playBtn");
+const currentTitle = document.getElementById("currentTitle");
+const currentArtist = document.getElementById("currentArtist");
+const progressBar = document.getElementById("progressBar");
+const currentTime = document.getElementById("currentTime");
+const duration = document.getElementById("duration");
+const volume = document.getElementById("volume");
+
+audio.volume = .8;
+
+function loadSong(index){
+
+    currentSong = index;
+
+    audio.src = songs[index].file;
+
+    currentTitle.textContent = songs[index].title;
+    currentArtist.textContent = songs[index].artist;
+
+    progressBar.style.width = "0%";
+    currentTime.textContent = "0:00";
+    duration.textContent = "0:00";
+}
+
+function playSong(index){
+
+    loadSong(index);
+
+    audio.play()
+    .then(()=>{
+        playing = true;
+        playBtn.textContent = "❚❚";
+    })
+    .catch(()=>{
+        playing = false;
+        playBtn.textContent = "▶";
+        alert("Song file abhi upload nahi hui. MP3 file upload karne ke baad ye button directly song play karega.");
+    });
+}
+
+function togglePlay(){
+
+    if(!audio.src){
+        playSong(0);
+        return;
+    }
+
+    if(playing){
+
+        audio.pause();
+        playing = false;
+        playBtn.textContent = "▶";
+
+    }else{
+
+        audio.play()
+        .then(()=>{
+            playing = true;
+            playBtn.textContent = "❚❚";
+        })
+        .catch(()=>{});
+    }
+}
+
+function nextSong(){
+
+    currentSong++;
+
+    if(currentSong >= songs.length){
+        currentSong = 0;
+    }
+
+    playSong(currentSong);
+}
+
+function previousSong(){
+
+    currentSong--;
+
+    if(currentSong < 0){
+        currentSong = songs.length - 1;
+    }
+
+    playSong(currentSong);
+}
+
+audio.addEventListener("timeupdate",()=>{
+
+    if(audio.duration){
+
+        const percent =
+        (audio.currentTime / audio.duration) * 100;
+
+        progressBar.style.width = percent + "%";
+
+        currentTime.textContent =
+        formatTime(audio.currentTime);
+    }
+
+});
+
+audio.addEventListener("loadedmetadata",()=>{
+
+    duration.textContent =
+    formatTime(audio.duration);
+
+});
+
+audio.addEventListener("ended",()=>{
+    nextSong();
+});
+
+document.getElementById("progress").addEventListener("click",(e)=>{
+
+    if(!audio.duration) return;
+
+    const width = e.currentTarget.clientWidth;
+    const clickX = e.offsetX;
+
+    audio.currentTime =
+    (clickX / width) * audio.duration;
+
+});
+
+volume.addEventListener("input",()=>{
+    audio.volume = volume.value;
+});
+
+function formatTime(seconds){
+
+    if(isNaN(seconds)) return "0:00";
+
+    const min = Math.floor(seconds / 60);
+
+    const sec = Math.floor(seconds % 60)
+    .toString()
+    .padStart(2,"0");
+
+    return min + ":" + sec;
+}
+
+</script>
+
+</body>
+</html>
